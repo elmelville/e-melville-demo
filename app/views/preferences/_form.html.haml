@@ -1,0 +1,22 @@
+%section.container.center.main
+  = form_for @preference, :url=>preferences_path(), :method => :put do |f|
+    - unless (flash[:notice].nil?)
+      %div(class="alert-box") 
+        = flash[:notice]
+    - if @preference.errors.any?
+      #error_explanation
+        %div(class="alert-box alert")= "#{pluralize(@preference.errors.count, "error")}. Your change is not saved."
+        %ul
+          - @preference.errors.full_messages.each do |msg|
+            %li= msg
+   
+    -if @hide_carrier_setting  
+      %div{:style=>"display:none;"}  
+        = f.label :carrier, "Select the shipping carrier to use for calculation"
+        = f.select(:carrier, client_carrier_choices, {include_blank: true}, :onchange=>"carrier_selected(this.value)")
+    -else
+      %div{:style=>"display:none;"}
+        = f.label :carrier, "Select the shipping carrier to use for calculation"
+        = f.select(:carrier, client_carrier_choices, {include_blank: true}, :onchange=>"carrier_selected(this.value)")
+    #main-body
+      = render :partial =>  carrier_partial_for('aus_post')

@@ -1,0 +1,28 @@
+%table
+  %tr(class="header") 
+    %td Shipping Methods
+    %td Description to show to customer <span class='has-tip' data-width='280' title='Provide a shorter description for your customers and include estimated delivery time ideally.'>?</span>
+    %td Make this fulfillment choice available<span class='has-tip' data-width='280' title='Make this choice available when using order fulfillment'>?</span>
+  - Preference.TemandoServiceList.each {|key, value|
+  %tr 
+    %td 
+      = value
+    %td
+      = text_field_tag("shipping_methods_desc_int[#{key}]", @preference.shipping_methods_desc_int[key.to_s].nil? ? value : @preference.shipping_methods_desc_int[key.to_s])        
+    %td
+      = text_area_tag("shipping_methods_long_desc_int[#{key}]", @preference.shipping_methods_long_desc_int[key.to_s].nil? ? value : @preference.shipping_methods_long_desc_int[key.to_s])      
+    %td
+      = check_box_tag("shipping_methods_int[#{key}]", value=1, @preference.shipping_methods_allowed_int[key.to_s])
+  -}    
+
+:javascript
+$(document).ready( function() {
+    
+  $('.hide_node').bind('ajax:success', function(){
+     $('.welcome_note').hide();
+  });
+    
+});
+
+
+

@@ -1,0 +1,15 @@
+gmail_username: ''
+gmail_password: '' 
+clients:
+  default:
+    menus: []
+    access:
+      all_except: []
+    carriers:
+      - :aus_post
+      - :aus_post_bus
+      - :temando
+    service_name: Seventyfour Shipping Calculator
+    service_host: shopify-shipping-helper.herokuapp.com
+    gmail_username: ''
+    gmail_password: '' 

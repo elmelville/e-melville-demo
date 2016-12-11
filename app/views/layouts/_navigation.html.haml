@@ -1,0 +1,9 @@
+%header.header
+  %section.container.center
+    %h1 Order Fulfilment Centre
+%nav
+  %section.container.center
+    %ul
+/      %li= link_to("Orders", order_index_url, :class => "#{request.url.include?(order_index_url)?'active' : ''}")              
+/      %li= link_to("Products", cached_product_index_url, :class => "#{request.url.include?(cached_product_index_url)?'active' : ''}")
+/      %li= link_to("Settings", preferences_url, :class => "#{request.url.include?(preferences_url)?'active' : ''}")             

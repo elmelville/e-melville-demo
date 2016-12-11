@@ -1,0 +1,7 @@
+-content_for :sidebar do
+  .panel.rounded-corners.left-panel
+    = render :partial => '/layouts/side_navigation', :locals=>{:active_link => "setting"}
+%p#notice= notice
+
+
+= link_to 'Edit', edit_preferences_path(@preference)

@@ -28,7 +28,6 @@ module ShopifyShippingHelper
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib)
-    require 'webify/client_access/railtie'
 
   end
 end

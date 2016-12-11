@@ -50,7 +50,6 @@ gem "kaminari"
 gem "pg"
 gem "config_spartan"
 gem "active_shipping"
-gem 'activemerchant'
 gem "unicorn"
 gem "typhoeus"
 gem "net-http-persistent"

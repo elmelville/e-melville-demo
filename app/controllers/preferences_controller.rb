@@ -50,20 +50,21 @@ class PreferencesController < ShopifyApp::AuthenticatedController
     @preference = get_preference()
 
     @preference.shop_url = session[:shopify_domain].to_s
-
-    @preference[:shipping_methods_long_desc_int] = params[:shipping_methods_long_desc_int].to_h
-    @preference[:shipping_methods_long_desc_dom] = params[:shipping_methods_long_desc_dom].to_h
-    @preference[:shipping_methods_allowed_int] = params[:shipping_methods_int].to_h
-    @preference[:shipping_methods_allowed_dom] = params[:shipping_methods_dom].to_h    
+puts 'some mofuckin params'
+puts params[:shipping_methods_long_desc_int].inspect
+    @preference[:shipping_methods_long_desc_int] = params[:shipping_methods_long_desc_int].to_s
+    @preference[:shipping_methods_long_desc_dom] = params[:shipping_methods_long_desc_dom].to_s
+    @preference[:shipping_methods_allowed_int] = params[:shipping_methods_int].to_s
+    @preference[:shipping_methods_allowed_dom] = params[:shipping_methods_dom].to_s    
     @preference.save
 
     shopify_api_shop = ShopifyAPI::Shop.current                           
     
-    params[:shipping_methods_long_desc_int].to_h.each do |method_name, value|
+    params[:shipping_methods_long_desc_int].each do |method_name, value|
       find_or_create_metafield(shopify_api_shop, method_name, value.to_s)                     
     end
     
-    params[:shipping_methods_long_desc_dom].to_h.each do |method_name, value|
+    params[:shipping_methods_long_desc_dom].each do |method_name, value|
       find_or_create_metafield(shopify_api_shop, method_name, value.to_s)                        
     end
                   

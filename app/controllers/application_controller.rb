@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
           charge = ShopifyAPI::RecurringApplicationCharge.create(:name => "Shipping Calculator Application", 
                                                              :price => 15, 
                                                              :test=>(Rails.env != "production"),
-                                                             :trial_days => 15,
+                                                             :trial_days => 100,
                                                              :return_url => "http://#{DOMAIN_NAMES[Rails.env]}/confirm_charge")
 
           redirect_to charge.confirmation_url

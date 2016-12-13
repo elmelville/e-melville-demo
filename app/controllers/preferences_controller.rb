@@ -4,7 +4,7 @@ class PreferencesController < ShopifyApp::AuthenticatedController
   include CarrierHelper
 
   around_action :shopify_session
-  before_action :check_payment
+  #before_action :check_payment
   layout "application-no-left"
 
 

@@ -1,7 +1,7 @@
 class HomeController < ShopifyApp::AuthenticatedController
 
   around_action :shopify_session, :except => 'welcome'
-  before_action :check_payment,:except => 'confirm_charge'
+  #before_action :check_payment,:except => 'confirm_charge'
   
   def welcome
     current_host = "#{request.host}#{':' + request.port.to_s if request.port != 80}"

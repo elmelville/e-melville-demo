@@ -48,14 +48,14 @@ class PreferencesController < ShopifyApp::AuthenticatedController
   def update
     
     @preference = get_preference()
-
+params = params.to_h
     @preference.shop_url = session[:shopify_domain].to_s
 puts 'some mofuckin params'
 puts params[:shipping_methods_long_desc_int].inspect
-    @preference[:shipping_methods_long_desc_int] = params[:shipping_methods_long_desc_int].to_s
-    @preference[:shipping_methods_long_desc_dom] = params[:shipping_methods_long_desc_dom].to_s
-    @preference[:shipping_methods_allowed_int] = params[:shipping_methods_int].to_s
-    @preference[:shipping_methods_allowed_dom] = params[:shipping_methods_dom].to_s    
+    @preference[:shipping_methods_long_desc_int] = params[:shipping_methods_long_desc_int]
+    @preference[:shipping_methods_long_desc_dom] = params[:shipping_methods_long_desc_dom]
+    @preference[:shipping_methods_allowed_int] = params[:shipping_methods_int]
+    @preference[:shipping_methods_allowed_dom] = params[:shipping_methods_dom]    
     @preference.save
 
     shopify_api_shop = ShopifyAPI::Shop.current                           

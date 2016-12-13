@@ -8,7 +8,7 @@ class RatesController < ShopifyApp::AuthenticatedController
    # log_params
     return nothing unless params[:rate] && preference
     puts ("---- Received rate request " + params.to_s)
-    service_class = carrier_service_class_for(preference.carrier, preference.client_config)
+    service_class = carrier_service_class_for(preference.carrier)
     service = service_class.new(preference, params[:rate])
     rates = service.fetch_rates
     if rates == {}

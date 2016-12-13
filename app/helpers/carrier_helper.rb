@@ -25,7 +25,9 @@ module CarrierHelper
   end
   
   def client_carrier_choices
-     client_config.carriers.map{|key| [AppConfig.carriers[key.to_s].description, key.to_s]}
+    if defined? client_config
+      client_config.carriers.map{|key| [AppConfig.carriers[key.to_s].description, key.to_s]}
+    end
   end
 
 end

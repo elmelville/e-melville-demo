@@ -12,6 +12,7 @@ class PreferencesController < ShopifyApp::AuthenticatedController
   def show
     @page_title = "Chief Products Shipping Calculator - Settings"
     @preference = get_preference
+    @preference.carrier = 'aus_post'
     @carrier_preference = get_carrier_preference(@preference.carrier)
     @free_shipping_options = get_collection_shipping_options
     

@@ -9,14 +9,5 @@
         %ul
           - @preference.errors.full_messages.each do |msg|
             %li= msg
-   
-    -if @hide_carrier_setting  
-      %div{:style=>"display:none;"}  
-        = f.label :carrier, "Select the shipping carrier to use for calculation"
-        = f.select(:carrier, client_carrier_choices, {include_blank: true}, :onchange=>"carrier_selected(this.value)")
-    -else
-      %div{:style=>"display:none;"}
-        = f.label :carrier, "Select the shipping carrier to use for calculation"
-        = f.select(:carrier, client_carrier_choices, {include_blank: true}, :onchange=>"carrier_selected(this.value)")
     #main-body
       = render :partial =>  carrier_partial_for('aus_post')

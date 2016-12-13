@@ -53,11 +53,11 @@ class PreferencesController < ShopifyApp::AuthenticatedController
 puts 'some mofuckin params'
 puts params.inspect
 puts 'methods'
-puts params[:shipping_methods_long_desc_int].to_h
-    @preference[:shipping_methods_long_desc_int] = params[:shipping_methods_long_desc_int]
-    @preference[:shipping_methods_long_desc_dom] = params[:shipping_methods_long_desc_dom]
-    @preference[:shipping_methods_allowed_int] = params[:shipping_methods_int]
-    @preference[:shipping_methods_allowed_dom] = params[:shipping_methods_dom]    
+puts params[:preference][:shipping_methods_long_desc_int].to_h
+    @preference[:shipping_methods_long_desc_int] = params[:preference][:shipping_methods_long_desc_int]
+    @preference[:shipping_methods_long_desc_dom] = params[:preference][:shipping_methods_long_desc_dom]
+    @preference[:shipping_methods_allowed_int] = params[:preference][:shipping_methods_int]
+    @preference[:shipping_methods_allowed_dom] = params[:preference][:shipping_methods_dom]    
     @preference.save
 
     shopify_api_shop = ShopifyAPI::Shop.current                           

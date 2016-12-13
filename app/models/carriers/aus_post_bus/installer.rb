@@ -21,9 +21,6 @@ module Carriers
           @preference.shipping_methods_allowed_dom = params[:shipping_methods_dom]
           @preference.shipping_methods_desc_dom = params[:shipping_methods_desc_dom]
           @preference.shipping_methods_desc_int = params[:shipping_methods_desc_int]
-          @preference.temando_shipping_methods = params[:temando_shipping_methods]
-          @preference.temando_shipping_methods_desc = params[:temando_shipping_methods_desc]
-          @preference.temando_shipping_methods_long_desc = params[:temando_shipping_methods_long_desc]
           @preference.rate_lookup_error = params[:preference][:rate_lookup_error]
 
           withShopify do

@@ -2,7 +2,7 @@ class RatesController < ShopifyApp::AuthenticatedController
   include CarrierHelper
 
   def shipping_rates 
-
+  puts 'does this trigger'
     preference = get_shop_prefence_from_request
 
    # log_params

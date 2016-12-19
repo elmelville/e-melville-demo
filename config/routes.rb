@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   match '/preferences/hide_welcome_note' => 'preferences#hide_welcome_note', :via=>[:get, :post]
   match '/preferences/carrier_selected' => 'preferences#carrier_selected', :via=>[:post]
 
+	match "confirm_charge" => "home#confirm_charge"
   match "/shipping-rates" => "rates#shipping_rates", :via => :post 
+
+	match '/australia_post_api_connections' => 'australia_post_api_connections#new', :via => :get
+
+  resources 'australia_post_api_connections'
 
 end

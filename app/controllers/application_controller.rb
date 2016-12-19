@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     
     def check_payment
 
-
+puts 'checking payment'
       if (Rails.env == "production")
         if (!ShopifyAPI::RecurringApplicationCharge.current)
             #place a recurring charge

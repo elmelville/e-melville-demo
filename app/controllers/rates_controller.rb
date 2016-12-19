@@ -6,6 +6,9 @@ class RatesController < ShopifyApp::AuthenticatedController
     preference = get_shop_prefence_from_request
 
    # log_params
+   puts 'params are'
+   puts params.inspect
+   puts params.permitted?
     return nothing unless params[:rate] && preference
     puts ("---- Received rate request " + params.to_s)
     service_class = carrier_service_class_for(preference.carrier)

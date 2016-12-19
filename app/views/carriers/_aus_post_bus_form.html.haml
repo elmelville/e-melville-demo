@@ -83,7 +83,7 @@
       %td
         = text_area_tag("shipping_methods_long_desc_int[#{key}]", @preference.shipping_methods_long_desc_int[key.to_s].nil? ? value : @preference.shipping_methods_long_desc_int[key.to_s])      
       %td
-        = check_box_tag("shipping_methods_int[#{key}]", value=0, @preference.shipping_methods_allowed_int[key.to_s])
+        = check_box_tag("shipping_methods_allowed_int[#{key}]", value=0, @preference.shipping_methods_allowed_int[key.to_s])
     -}  
 .settings-table-wrapper
   %h2
@@ -119,7 +119,7 @@
           -method_key = key
         = text_area_tag("shipping_methods_long_desc_dom[#{key}]", @preference.shipping_methods_long_desc_dom[method_key.to_s].nil? ? value : @preference.shipping_methods_long_desc_dom[method_key.to_s], :disabled => disabled)            
       %td
-        = check_box_tag("shipping_methods_dom[#{key}]", value=0, @preference.shipping_methods_allowed_dom[key.to_s])
+        = check_box_tag("shipping_methods_allowed_dom[#{key}]", value=0, @preference.shipping_methods_allowed_dom[key.to_s])
     -}    
 
 :javascript

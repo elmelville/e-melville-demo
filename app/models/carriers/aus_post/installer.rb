@@ -17,10 +17,17 @@ module Carriers
       end
 
       def configure(params)
-          @preference.shipping_methods_allowed_int = params[:shipping_methods_int].to_h
-          @preference.shipping_methods_allowed_dom = params[:shipping_methods_dom].to_h
-          @preference.shipping_methods_desc_dom = params[:shipping_methods_desc_dom].to_h
-          @preference.shipping_methods_desc_int = params[:shipping_methods_desc_int].to_h
+
+          shipping_methods_desc_int = params.require('shipping_methods_long_desc_int').permit(:INT_PARCEL_COR_OWN_PACKAGING, :INT_PARCEL_EXP_OWN_PACKAGING, :INT_PARCEL_STD_OWN_PACKAGING, :INT_PARCEL_AIR_OWN_PACKAGING, :INT_PARCEL_SEA_OWN_PACKAGING)
+          shipping_methods_allowed_int = params.require('shipping_methods_allowed_int').permit(:INT_PARCEL_COR_OWN_PACKAGING, :INT_PARCEL_EXP_OWN_PACKAGING, :INT_PARCEL_STD_OWN_PACKAGING, :INT_PARCEL_AIR_OWN_PACKAGING, :INT_PARCEL_SEA_OWN_PACKAGING)
+          shipping_methods_allowed_dom = params.require('shipping_methods_allowed_dom').permit(:AUS_PARCEL_REGULAR,:AUS_PARCEL_EXPRESS,:AUS_PARCEL_REGULAR_SATCHEL_500G,:AUS_PARCEL_EXPRESS_SATCHEL_500G,:AUS_PARCEL_REGULAR_SATCHEL_3KG,:AUS_PARCEL_EXPRESS_SATCHEL_3KG,:AUS_PARCEL_REGULAR_SATCHEL_5KG, :AUS_PARCEL_EXPRESS_SATCHEL_5KG)
+          shipping_methods_desc_dom = params.require('shipping_methods_long_desc_dom').permit(:AUS_PARCEL_REGULAR,:AUS_PARCEL_EXPRESS,:AUS_PARCEL_REGULAR_SATCHEL_500G,:AUS_PARCEL_EXPRESS_SATCHEL_500G,:AUS_PARCEL_REGULAR_SATCHEL_3KG,:AUS_PARCEL_EXPRESS_SATCHEL_3KG,:AUS_PARCEL_REGULAR_SATCHEL_5KG, :AUS_PARCEL_EXPRESS_SATCHEL_5KG)
+
+
+          @preference.shipping_methods_allowed_int = shipping_methods_allowed_int.to_h
+          @preference.shipping_methods_allowed_dom = shipping_methods_allowed_dom.to_h
+          @preference.shipping_methods_desc_dom = shipping_methods_desc_dom.to_h
+          @preference.shipping_methods_desc_int = shipping_methods_desc_int.to_h
           @preference.rate_lookup_error = params[:preference][:rate_lookup_error].to_s
 
           withShopify do

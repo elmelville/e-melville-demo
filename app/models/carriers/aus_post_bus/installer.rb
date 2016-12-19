@@ -17,8 +17,8 @@ module Carriers
       end
 
       def configure(params)
-          @preference.shipping_methods_allowed_int = params[:shipping_methods_int]
-          @preference.shipping_methods_allowed_dom = params[:shipping_methods_dom]
+          @preference.shipping_methods_allowed_int = params[:shipping_methods_allowed_int]
+          @preference.shipping_methods_allowed_dom = params[:shipping_methods_allowed_dom]
           @preference.shipping_methods_desc_dom = params[:shipping_methods_desc_dom]
           @preference.shipping_methods_desc_int = params[:shipping_methods_desc_int]
           @preference.rate_lookup_error = params[:preference][:rate_lookup_error]

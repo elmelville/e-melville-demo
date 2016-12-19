@@ -48,25 +48,26 @@ class PreferencesController < ShopifyApp::AuthenticatedController
   def update
     
     @preference = get_preference()
-    inner_params = params.to_h
     @preference.shop_url = session[:shopify_domain].to_s
-puts 'some mofuckin params'
-puts inner_params
-puts 'methods'
-puts inner_params[:preference]
-    @preference[:shipping_methods_long_desc_int] = params[:shipping_methods_long_desc_int]
-    @preference[:shipping_methods_long_desc_dom] = params[:shipping_methods_long_desc_dom]
-    @preference[:shipping_methods_allowed_int] = params[:shipping_methods_int]
-    @preference[:shipping_methods_allowed_dom] = params[:shipping_methods_dom]    
+
+    shipping_methods_long_desc_int = params.require('shipping_methods_long_desc_int').permit(:INT_PARCEL_COR_OWN_PACKAGING, :INT_PARCEL_EXP_OWN_PACKAGING, :INT_PARCEL_STD_OWN_PACKAGING, :INT_PARCEL_AIR_OWN_PACKAGING, :INT_PARCEL_SEA_OWN_PACKAGING)
+    shipping_methods_allowed_int = params.require('shipping_methods_allowed_int').permit(:INT_PARCEL_COR_OWN_PACKAGING, :INT_PARCEL_EXP_OWN_PACKAGING, :INT_PARCEL_STD_OWN_PACKAGING, :INT_PARCEL_AIR_OWN_PACKAGING, :INT_PARCEL_SEA_OWN_PACKAGING)
+    shipping_methods_allowed_dom = params.require('shipping_methods_allowed_dom').permit(:AUS_PARCEL_REGULAR,:AUS_PARCEL_EXPRESS,:AUS_PARCEL_REGULAR_SATCHEL_500G,:AUS_PARCEL_EXPRESS_SATCHEL_500G,:AUS_PARCEL_REGULAR_SATCHEL_3KG,:AUS_PARCEL_EXPRESS_SATCHEL_3KG,:AUS_PARCEL_REGULAR_SATCHEL_5KG, :AUS_PARCEL_EXPRESS_SATCHEL_5KG)
+    shipping_methods_long_desc_dom = params.require('shipping_methods_long_desc_dom').permit(:AUS_PARCEL_REGULAR,:AUS_PARCEL_EXPRESS,:AUS_PARCEL_REGULAR_SATCHEL_500G,:AUS_PARCEL_EXPRESS_SATCHEL_500G,:AUS_PARCEL_REGULAR_SATCHEL_3KG,:AUS_PARCEL_EXPRESS_SATCHEL_3KG,:AUS_PARCEL_REGULAR_SATCHEL_5KG, :AUS_PARCEL_EXPRESS_SATCHEL_5KG)
+
+    @preference[:shipping_methods_long_desc_int] = shipping_methods_long_desc_int.to_h || {}
+    @preference[:shipping_methods_long_desc_dom] = shipping_methods_long_desc_dom.to_h || {}
+    @preference[:shipping_methods_allowed_int] = shipping_methods_allowed_int.to_h || {}
+    @preference[:shipping_methods_allowed_dom] = shipping_methods_allowed_dom.to_h || {}
     @preference.save
 
     shopify_api_shop = ShopifyAPI::Shop.current                           
     
-    params[:shipping_methods_long_desc_int].each do |method_name, value|
+    shipping_methods_long_desc_int.each do |method_name, value|
       find_or_create_metafield(shopify_api_shop, method_name, value.to_s)                     
     end
     
-    params[:shipping_methods_long_desc_dom].each do |method_name, value|
+    shipping_methods_long_desc_dom.each do |method_name, value|
       find_or_create_metafield(shopify_api_shop, method_name, value.to_s)                        
     end
                   
@@ -212,8 +213,8 @@ puts inner_params[:preference]
   
   def preference_params
     params.require(:preference).permit(:origin_postal_code, :default_weight, :surcharge_percentage, :surcharge_amount, :height, :width, :length, :items_per_box, :default_charge, :shipping_methods_allowed_dom, :default_box_size,
-      :shipping_methods_allowed_int, :container_weight, :shipping_methods_desc_int, :shipping_methods_desc_dom,:shipping_methods_long_desc_int, :shipping_methods_long_desc_dom, :shop_url, :carrier, 
-      :free_shipping_option, :free_shipping_description, :offers_flat_rate, :under_weight, :flat_rate,:free_shipping_by_collection)
+      :container_weight,:shipping_methods_desc_int, :shipping_methods_desc_dom,:shipping_methods_allowed_int, :shipping_methods_long_desc_dom, :shop_url, :carrier, 
+      :free_shipping_option, :free_shipping_description, :offers_flat_rate, :under_weight, :flat_rate,:free_shipping_by_collection)      
   end
 
   def get_carrier_preference(carrier)

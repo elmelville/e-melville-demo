@@ -1,6 +1,8 @@
 class RatesController < ShopifyApp::AuthenticatedController
   include CarrierHelper
 
+  around_action :shopify_session
+
   def shipping_rates 
   puts 'does this trigger'
     preference = get_shop_prefence_from_request

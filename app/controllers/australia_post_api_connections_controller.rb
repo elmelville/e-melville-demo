@@ -1,5 +1,7 @@
 class AustraliaPostApiConnectionsController < ShopifyApp::AuthenticatedController
 
+  around_action :shopify_session
+
   # GET /australia_post_api_connections/new
   # GET /australia_post_api_connections/new.json
   def new

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   private
     def current_shop
+      puts 'current shop'
       return nil unless session[:shopify]
       puts 'session for'
       puts ( session[:shopify_domain].to_s)

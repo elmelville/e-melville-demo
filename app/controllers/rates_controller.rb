@@ -14,9 +14,10 @@ class RatesController < ApplicationController
    puts 'params are'
    puts params.inspect
    puts params.permitted?
-    top_level = params.require(:rate).permit(:shop_url,:controller,:action,:origin, :destination, :items)
+    top_level = params.require('rate').permit('shop_url','controller','action','origin', 'destination', 'items')
    puts top_level.inspect
-   puts top_level[:origin]
+   puts top_level['origin']
+   puts top_level['origin']['province']
     return nothing unless params[:rate] && preference
     puts ("---- Received rate request " + params.to_s)
     service_class = carrier_service_class_for(preference.carrier)

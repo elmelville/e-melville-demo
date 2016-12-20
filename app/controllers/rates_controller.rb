@@ -9,10 +9,13 @@ class RatesController < ApplicationController
 
     # log_params
     puts 'params are'
-    params = params.require("rate").permit(:shop_url,:controller,:action,:origin, :destination, :items)
     puts params.inspect
-    puts params.permitted?
-    puts params[:shop_url]
+    puts 'and then'
+    allowed_params = params.require("rate").permit(:shop_url,:controller,:action,:origin, :destination, :items)
+    puts allowed_params.inspect
+    puts allowed_params.permitted?
+    puts allowed_params[:shop_url]
+    puts params.inspect
 
     return nothing unless params[:rate] && preference
 

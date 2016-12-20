@@ -20,7 +20,9 @@ module Carriers
     def destination
       puts 'destination params'
       puts params.inspect
-      @destination ||= Location.new(params[:destination])
+      allowable_params = params.require(:destination).permit(:country, :postal_code, :province, :city, :name, :address1, :address2, :address3, :phone, :fax, :address_type, :company_name)
+      puts allowable_params
+      @destination ||= Location.new(allowable_params)
     end
     
     def get_currency    

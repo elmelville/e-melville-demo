@@ -6,10 +6,14 @@ class RatesController < ApplicationController
   puts 'does this trigger'
     preference = get_shop_prefence_from_request
 
+top_level = params.require(:rate).permit(:shop_url,:controller,:action)
+sub level = params.require(:rate).permit(rate: [:origin, :destination])
    # log_params
    puts 'params are'
    puts params.inspect
-   puts params.permitted?
+   puts top_level.inspect
+   puts sub_level.inspect
+   puts sub_level[:origin][:country]
     return nothing unless params[:rate] && preference
     puts ("---- Received rate request " + params.to_s)
     service_class = carrier_service_class_for(preference.carrier)

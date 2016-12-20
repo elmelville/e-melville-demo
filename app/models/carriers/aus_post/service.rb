@@ -425,12 +425,12 @@ puts params.inspect
             calculated_weight = calculated_weight.to_f / 1000              
             @australia_post_api_connection = AustraliaPostApiConnection.new({:weight=> calculated_weight,
                                                                            :from_postcode => preference.origin_postal_code,
-                                                                           :country_code =>  destination.country_code.to_s,
-                                                                           :to_postcode => destination.postal_code,
+                                                                           :country_code =>  params[:destination]['country'].to_s,
+                                                                           :to_postcode => params[:destination]['postal_code'].to_s,
                                                                            :height=>item_height, :width=>item_width, :length=>item_length,
                                                                            :container_weight => preference.container_weight
             })
-            @australia_post_api_connection.domestic = ( destination.country_code.to_s == "AU" )
+            @australia_post_api_connection.domestic = ( params[:destination]['country'].to_s == "AU" )
 
             # get country list from the API -- we'll format these if there were no errors
             @service_list = @australia_post_api_connection.data_oriented_methods(:service) # get the service list

@@ -347,25 +347,26 @@ module Carriers
   #                           total_price: preference.default_charge * 100,
   #                           currency: "AUD"})
               return @service_list
-            end         
+            end       
+            puts '1'  
             @australia_post_api_connection = AustraliaPostApiConnection.new({
               from_postcode: preference.origin_postal_code,
               height: item_height,
               width: item_width,
               length: item_length
             }) 
-                   
+            puts '2'       
             quan = 0
             weight = 0
 
             # get the items weight
 
-            quan = item[:quantity].to_i    
-            weight = item[:grams].to_i if (item[:requires_shipping])  
+            quan = item["quantity"].to_i    
+            weight = item["grams"].to_i if (item["requires_shipping"])  
 
             calculated_weight = weight
             rate_list = Array.new
-
+puts '3'  
             if (preference.offers_flat_rate)                            
              if (calculated_weight <= preference.under_weight)
                rate_list << { service_name: "Shipping",
@@ -375,7 +376,7 @@ module Carriers
                return
              end
             end
-           
+            puts '4'
             if (preference.free_shipping_by_collection)
              subtract_weight = 0
 
@@ -384,13 +385,13 @@ module Carriers
              app_shop = self.shop
 
              ShopifyAPI::Session.temp(app_shop.myshopify_domain, app_shop.token) do         
-               p = ShopifyAPI::Product.find(item[:product_id].to_i)
+               p = ShopifyAPI::Product.find(item["product_id"].to_i)
 
                p.collections.each do |col|
                  fields = col.metafields
                  field = fields.find { |f| f.key == 'free_shipping' && f.namespace ='AusPostShipping'}
                  unless field.nil?
-                   subtract_weight += item[:grams] if field.value.to_s == "true"
+                   subtract_weight += item["grams"] if field.value.to_s == "true"
                  end
                end
 
@@ -399,7 +400,7 @@ module Carriers
                  field = fields.find { |f| f.key == 'free_shipping' && f.namespace ='AusPostShipping'}
                  
                  unless field.nil?
-                   subtract_weight +=  item[:grams] if field.value.to_s == "true"
+                   subtract_weight +=  item["grams"] if field.value.to_s == "true"
                  end
                end
              end
@@ -407,7 +408,7 @@ module Carriers
              calculated_weight = calculated_weight.to_f - subtract_weight
 
             end
-           
+            puts '5'           
             # in grams, convert to kg
             if (calculated_weight.to_f == 0.0)
              #no need to call australia post. no weight of item

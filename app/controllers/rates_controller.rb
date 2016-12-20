@@ -1,9 +1,11 @@
 class RatesController < ShopifyApp::AuthenticatedController
+
+  protect_from_forgery with: :null_session
+
   include CarrierHelper
 
-  protect_from_forgery unless: -> { request.format.json? }
-
   around_action :shopify_session
+  after_action :set_csrf_headers, only: :shipping_rates
 
   def shipping_rates 
   puts 'does this trigger'
@@ -24,6 +26,8 @@ class RatesController < ShopifyApp::AuthenticatedController
       render :json => {:rates => rates}
     end
   rescue ActiveMerchant::Shipping::ResponseError => e
+    puts 'some shit went down'
+    puts params.inspect
     Rails.logger.debug e.message
     puts e.message  unless Rails.env.production?
     render nothing: true
@@ -51,4 +55,15 @@ class RatesController < ShopifyApp::AuthenticatedController
   def nothing
     render nothing: true
   end
+
+  protected
+    def set_csrf_headers
+      if request.xhr?
+        # Add the newly created csrf token to the page headers
+        # These values are sent on 1 request only
+        response.headers['X-CSRF-Token'] = "#{form_authenticity_token}"
+        response.headers['X-CSRF-Param'] = "#{request_forgery_protection_token}"
+      end
+    end
+  end  
 end

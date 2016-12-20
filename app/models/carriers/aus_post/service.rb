@@ -329,6 +329,12 @@ module Carriers
             end  
             price_adjustment = cached_item.cost_adjustment.to_f                      
           end
+          puts 'post easure info'
+          puts item.inspect
+          puts cached_item.inspect
+          puts item_height
+          puts item_width
+          puts item_length          
           if item_height > 105 or item_width > 105 or item_length > 105
             @returned_rates = []
             @service_list = {}
@@ -613,7 +619,9 @@ module Carriers
           end   
           #get and add rates from temando
           combined_temando_rates = []
-          temando_rates = get_temando_quote 
+          #don't fetch temando rates
+          #temando_rates = get_temando_quote 
+          temando_rates = []
           puts 'returned rates'
           puts temando_rates.inspect
           unless temando_rates.nil?

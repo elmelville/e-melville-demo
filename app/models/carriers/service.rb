@@ -18,6 +18,8 @@ module Carriers
 
     #return activeshipping location obj
     def destination
+      puts 'destination params'
+      puts params.inspect
       @destination ||= Location.new(params[:destination])
     end
     

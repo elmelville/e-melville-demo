@@ -420,7 +420,8 @@ puts '3'
 
               return @service_list
             end
-
+puts 'destination params'
+puts params.inspect
             calculated_weight = calculated_weight.to_f / 1000              
             @australia_post_api_connection = AustraliaPostApiConnection.new({:weight=> calculated_weight,
                                                                            :from_postcode => preference.origin_postal_code,

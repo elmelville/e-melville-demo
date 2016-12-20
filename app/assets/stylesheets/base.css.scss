@@ -12,33 +12,6 @@ body 		{background: #ccc;color: #222;padding: 0;margin: 0;
 strong		{font-weight: normal;font-family: "Forza Bold"} /* OVERRIDE FAKE BOLDING OF CUSTOM FONT */
 .unBold		{font-family: "Forza-Book";}
 
-/* FONTS 
---------------- */
-@font-face {
-	font-family:"Forza Book";
-	src: url("https://cdn.shopify.com/s/files/1/0277/9567/files/Forza-Book.ttf?36341") format('truetype');
-	font-weight:normal;
-	font-style:normal;
-}
-@font-face {
-	font-family:"Forza Bold";
-	src: url("https://cdn.shopify.com/s/files/1/0277/9567/files/Forza-Bold.otf?16455569250410404338") format('truetype');
-	font-weight:normal;
-	font-style:normal;
-}
-@font-face {
-	font-family:"Forza Black";
-	src: url("https://cdn.shopify.com/s/files/1/0277/9567/files/Forza-Black.ttf?16455569250410404338") format('truetype');
-	font-weight:normal;
-	font-style:normal;
-}
-@font-face {
-	font-family:"Vitesse Bold";
-	src: url("https://cdn.shopify.com/s/files/1/0277/9567/files/Vitesse-Bold.ttf?36343") format('truetype');
-	font-weight:normal;
-	font-style:normal;
-}
-
 
 /* HEADER
 --------------- */

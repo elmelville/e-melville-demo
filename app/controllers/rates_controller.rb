@@ -1,11 +1,6 @@
-class RatesController < ShopifyApp::AuthenticatedController
-
-  protect_from_forgery with: :null_session
-
+class RatesController < ApplicationController
   include CarrierHelper
 
-  around_action :shopify_session
-  after_action :set_csrf_headers, only: :shipping_rates
 
   def shipping_rates 
   puts 'does this trigger'
@@ -57,7 +52,7 @@ class RatesController < ShopifyApp::AuthenticatedController
   end
 
   protected
-  
+
   def set_csrf_headers
     if request.xhr?
       # Add the newly created csrf token to the page headers

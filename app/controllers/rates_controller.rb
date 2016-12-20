@@ -11,7 +11,7 @@ class RatesController < ApplicationController
     puts 'params are'
     puts params.inspect
     puts 'and then'
-    allowed_params = params.require("rate").permit(:shop_url,:controller,:action,:origin, :destination, :items)
+    allowed_params = params.require("rate").permit("shop_url")
     puts allowed_params.inspect
     puts allowed_params.permitted?
     puts allowed_params[:shop_url]
@@ -20,7 +20,7 @@ class RatesController < ApplicationController
     return nothing unless params[:rate] && preference
 
     puts ("---- Received rate request " + params.to_s)
-    service_class = carrier_service_class_for(preference.carrier)
+    service_class = carrier_service_class_for('aus_post')
     service = service_class.new(preference, params[:rate])
     rates = service.fetch_rates
     if rates == {}

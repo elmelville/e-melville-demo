@@ -1,4 +1,6 @@
 require 'active_shipping'
+# TODO: I really dislike including things in the global namespace. Then I have to go look up the code and make sure this is just a module with classes and isn't defining random methods that might mysteriously with my own
+include ActiveMerchant::Shipping
 
 module Carriers
   class Service
@@ -20,9 +22,10 @@ module Carriers
     def destination
       puts 'destination params'
       puts params.inspect
-      allowable_params = params.require(:destination).permit(:country, :postal_code, :province, :city, :name, :address1, :address2, :address3, :phone, :fax, :address_type, :company_name)
-      puts allowable_params
-      @destination ||= Location.new(allowable_params)
+      puts params[:destination].permitted?
+      @destination ||= Location.new(params[:destination])
+      puts 'destination is'
+      puts @destination.inspect
     end
     
     def get_currency    

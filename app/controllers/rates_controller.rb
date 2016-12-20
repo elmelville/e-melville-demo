@@ -1,6 +1,8 @@
 class RatesController < ShopifyApp::AuthenticatedController
   include CarrierHelper
 
+  protect_from_forgery unless: -> { request.format.json? }
+
   around_action :shopify_session
 
   def shipping_rates 

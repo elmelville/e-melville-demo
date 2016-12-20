@@ -13,7 +13,7 @@ class RatesController < ApplicationController
    # log_params
    puts 'params are'
    puts params.inspect
-   puts.params.permitted?
+   puts params.permitted?
     top_level = params.require(:rate).permit(:shop_url,:controller,:action,:origin, :destination, :items)
    puts top_level.inspect
    puts top_level[:origin]

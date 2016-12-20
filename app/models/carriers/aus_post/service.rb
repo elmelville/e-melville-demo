@@ -307,11 +307,11 @@ module Carriers
         #does order have both packages and satchels?
         @mixed_order = false
         @service_counts = {}
-        puts '1'
         items.each do |item|
-          puts 'item'
-          current_id = item[:product_id].to_s
-          cached_item = CachedProduct.find_by_product_id(current_id)
+          current_id = item["product_id"].to_s
+puts 'id is'
+puts current_id
+          cached_item = CachedProduct.find_by(product_id: current_id)
           item_height = 0.0
           item_width = 0.0
           item_length = 0.0

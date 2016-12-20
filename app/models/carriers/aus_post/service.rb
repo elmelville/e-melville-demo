@@ -309,8 +309,6 @@ module Carriers
         @service_counts = {}
         items.each do |item|
           current_id = item["product_id"].to_s
-puts 'id is'
-puts current_id
           cached_item = CachedProduct.find_by(product_id: current_id)
           item_height = 0.0
           item_width = 0.0
@@ -319,13 +317,13 @@ puts current_id
           #set dimensions and return empty list if item has no dimensions
           if cached_item
             if cached_item.height != 0.0
-              item_height = cached_item.height
+              item_height = cached_item.height || 0
             end
             if cached_item.width != 0.0
-              item_width = cached_item.width
+              item_width = cached_item.width || 0
             end
             if cached_item.length != 0.0
-              item_length = cached_item.length
+              item_length = cached_item.length || 0
             end  
             price_adjustment = cached_item.cost_adjustment.to_f                      
           end

@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213111541) do
+ActiveRecord::Schema.define(version: 20161220050046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cached_products", force: :cascade do |t|
+    t.string   "product_id"
+    t.integer  "shop_id"
+    t.string   "sku"
+    t.decimal  "height"
+    t.decimal  "width"
+    t.decimal  "length"
+    t.string   "product_name"
+    t.string   "large_item"
+    t.string   "small_item"
+    t.integer  "max_small"
+    t.decimal  "cost_adjustment"
+    t.json     "variants"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "preference", force: :cascade do |t|
     t.string   "shop_url"

@@ -1,0 +1,335 @@
+*  			{margin: 0;padding: 0;}
+html, body 	{font-size: 100%}
+body 		{background: #ccc;color: #222;padding: 0;margin: 0;
+			font-weight: normal;font-style: normal;line-height: 1;position: relative;
+			cursor: default;font-family: "Forza Book";}
+			
+.container	{max-width: 994px;width: 95%; margin: auto;}
+.center		{margin: 0 auto;}
+.full-width	{width: 100%;}
+.spacer		{height:32px;display:block;}
+
+strong		{font-weight: normal;font-family: "Forza Bold"} /* OVERRIDE FAKE BOLDING OF CUSTOM FONT */
+.unBold		{font-family: "Forza-Book";}
+
+/* FONTS 
+--------------- */
+@font-face {
+	font-family:"Forza Book";
+	src: url("https://cdn.shopify.com/s/files/1/0277/9567/files/Forza-Book.ttf?36341") format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face {
+	font-family:"Forza Bold";
+	src: url("https://cdn.shopify.com/s/files/1/0277/9567/files/Forza-Bold.otf?16455569250410404338") format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face {
+	font-family:"Forza Black";
+	src: url("https://cdn.shopify.com/s/files/1/0277/9567/files/Forza-Black.ttf?16455569250410404338") format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face {
+	font-family:"Vitesse Bold";
+	src: url("https://cdn.shopify.com/s/files/1/0277/9567/files/Vitesse-Bold.ttf?36343") format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}
+
+
+/* HEADER
+--------------- */
+.header 	{background: #000;width: 100%;height: 84px;}
+.header h1 	{color: #fff;font-size: 28px;margin: 32px 0 0 32px;float:left;
+			font-family: "Vitesse Bold";font-weight: normal;}
+#chief-logo	{float:left;margin: 16px 0 16px 32px;}
+
+
+/* NAVIGATION
+--------------- */
+nav ul 		{list-style: none;margin-top: 10px; overflow: hidden;padding-left: 32px;}
+nav ul li	{display: inline-block; margin-top:10px;}
+nav ul li a	{background: #fff; padding: 10px 36px; border-top-left-radius: 6px;
+			border-top-right-radius: 6px;box-shadow: 0 0 10px #222;font-size: 14px;
+			display: block;color: #000; text-decoration: none; text-transform: uppercase;
+			font-family: "Forza Bold";opacity: .3;}
+nav li a.active {opacity: 1;}
+
+/* MAIN 
+--------------- */
+.main 		{background: #fff; box-shadow: 0 0 10px #222; border-radius: 6px;
+			padding: 32px 32px 36px;max-width: 922px;margin-bottom: 32px;}
+.main h1	{text-transform: uppercase;color: #000;margin-bottom: 28px;font-size: 32px;
+			font-family: "Vitesse Black";font-weight:normal;}
+.main h2	{font-size: 22px; color: #000;margin-bottom: 14px;font-weight:normal;
+			font-family: "Forza Bold";}
+.main h3 	{text-transform: uppercase;color: #000; margin-bottom: 4px;
+			font-size: 15px;font-family: "Forza Bold"; font-weight: normal;}
+.main h4	{font-family: "Forza-Bold";font-size: 13px;color: #000;margin-bottom: 5px;
+			text-transform: uppercase;color: #444;}
+
+.sub-container {border: 1px solid #d4d4d4; background: #eaeaea; padding: 30px 24px;}
+
+
+/* FORM FIELDS
+--------------- */
+label		{color: #000; font-size: 13px; display:block; margin-top: 20px;
+			margin-bottom: 4px;font-family: "Forza Bold";}
+input[type=text], textarea	{padding: 10px; background: #fff;font-size: 15px; display:block;
+			box-shadow: inset 0 0 4px #333;border: 0;font-family: "Forza Book";}
+textarea	{min-height: 70px;font-family: "Forza Book";}
+h2 input	{margin-right: 6px;}
+.disabled	{opacity: 0.5;}
+#confirm-popup #error-log {width:100%;height: 300px;overflow: scroll;}
+
+/* BUTTONS 
+--------------- */
+/* BIG GREY WITH LIGHT GREY TEXT BUTTON */
+.button1	{cursor: pointer;border-radius: 5px;padding: 8px 14px; color: #fff; text-transform: uppercase;
+			font-size: 13px; font-family: "Forza Bold"; background: #999;text-decoration: none;}
+/* BIG GRADIANT GREY BUTTON */
+.button2 	{cursor: pointer;border-radius: 5px; border: 1px solid #808080;padding: 8px 14px; color: #fff;
+			font-size: 13px; text-transform: uppercase;font-family: "Forza Bold"; background: #999; 
+    		background: -webkit-linear-gradient(#999, #565656);
+    		background: -o-linear-gradient(#999, #565656); 
+    		background: -moz-linear-gradient(#999, #565656);
+    		background: linear-gradient(#999, #565656);margin-right: 6px;
+    		text-decoration:none;text-align:center;}
+/*  BIG BLACK BUTTON */
+.button3	{cursor: pointer;background: #000;color: #fff;border-radius: 3px;padding: 9px 20px 7px;border: 0;
+			font-size: 13px;font-family: "Forza Bold";text-decoration: none;text-align:center;
+			text-transform: uppercase;}
+/* SMALL TEAL BUTTON (CONFIRM POP UP) */
+.button4	{cursor: pointer;background: #617B88;border-radius: 6px;padding: 8px 14px; color: #fff; font-size: 13px;
+			text-transform: uppercase; font-family: "Forza Bold"; text-decoration: none;}
+/* SMALL FULL WIDTH GREY BUTTON (IN COMBINATION WITH BUTTON2) */
+.button5	{cursor: pointer;width: 92%;display:block;padding: 4px 4% 2px;margin-bottom:5px;border-radius: 4px;}
+/* SMALL HALF WIDTH GREY BUTTON (IN COMBINATION WITH BUTTON2) */
+.button6	{cursor: pointer;width: 50%;display:block;float:left;padding: 4px 4% 2px;margin-right:0;border-radius: 4px;}
+/* BIG RED BUTTON (CONTACT CUSTOMER) */
+.button7	{cursor: pointer;border-radius: 5px;padding: 12px 18px 10px; color: #fff; text-transform: uppercase; float:right;
+			font-size: 13px; font-family: "Forza Bold"; background: #870000;text-decoration: none;}
+/* ENABLED RED BUTTON */
+.enabled	{background: #97040B; border: 1px solid #6D0102;box-shadow: inset 0 0 4px #000;}
+/* DISABLED GREY BUTTON */
+.disabled	{cursor: none;color: #c9c9c9; background:#b2b2b2;}
+/* USED ON THE PRODUCTS PAGE */
+.syncButton	{cursor: pointer;padding: 10px 50px; float:right;}
+
+/* TABLES
+--------------- */
+table		{width: 100%;font-size: 13px;border-collapse: collapse;border: 3px solid #989898;}
+thead		{background: #607B88;color: #fff;}
+thead tr	{font-size:13px;font-family: "Forza Bold";}
+thead td	{padding: 1% 1.3%;border-right: 1px solid #6D8490;}
+.thead-light{font-weight:normal;font-family: "Forza Book";}
+
+tbody		{}
+tbody tr	{background: #fff;}
+tbody td	{padding: 10px 1.3%;}
+.alt-bgs td	{border: 1px solid #e5e5e5;}
+.alt-bgs tr:nth-child(odd) {background: #f4f4f4}
+
+table input[type=text], table textarea {font-size: 13px;padding: 8px; width: 100%;}
+table a.button1 {display:block;border-radius:3px;width: 100%;padding: 8px 0;text-align:center;}
+table a.button3 {display:block;}
+
+/* PRODUCT TABLE
+--------------- */
+.customer-name		{font-family: "Forza-Bold";font-size: 14px;}
+.product-name		{line-height: 16px;}
+.order-details 		{border:0;}
+.order-details td	{padding: 0;}
+.product-shipping 	{background: #e1e1e1;}
+.borderRight 		{border-right: 1px solid #d6d6d6;}
+.arrow				{float:left; margin: -10px 10px 15px 0;width: 22px; height: 40px;
+					background: url("/assets/arrow.png") no-repeat;}
+.product-shipping 	{border-bottom: 3px solid #989898;}
+.shipping-text		{line-height: 16px;padding: 16px 1.3%;}
+.shipping-text a	{color: #006899;}
+.shipping-icon 		{float: left;margin-right: 14px;}
+.post-company		{font-size: 14px; font-family: "Forza-Bold";}
+.total				{font-size: 16px;font-family: "Forza-Bold"; text-transform: uppercase;}
+.fulfilled			{background: #8f8f8f;}
+.fulfilled .borderRight	{border-right: 1px solid #808080;}
+.fulfilled .arrow	{background: url("/assets/arrow.png") no-repeat;}
+.qty				{font-family: "Forza-Bold";}
+input[type=text].dimensions {text-align:center;font-family: "Forza-Bold";}
+
+/* CONFIRM POP UP
+---------------- */
+#confirm-popup		{padding: 35px 52px; width: 440px; position: absolute;
+					top: 20%; left: 0; right: 0; margin:auto; background: #fff;
+					box-shadow: 0 0 10px #000;text-align:center;display: none;}
+#confirm-popup h2	{text-transform: uppercase;color: #000;margin-bottom: 28px;font-size: 28px;
+					font-family: "Vitesse Black";font-weight:normal;}
+#confirm-popup p	{font-size: 13px; margin-bottom: 54px;line-height: 18px;}
+#confirm-popup input {margin-right: 3px;}
+#confirm-popup .button4, #confirm-popup .button1
+					{padding: 10px 18px;border-radius: 4px;}
+
+/* ORDERS PAGE
+---------------- */
+.process-text 		{margin-left: 8px;}
+
+/* PRODUCTS PAGE
+---------------- */
+.product-button-bar	{padding: 24px;}
+.product-button-bar .button2	{width: 122px; display: inline-block;}
+.by			{width: 5%;float:left;padding: 10px 3%;color: #999; font-family: "Forza-Bold";}
+.shipping-width, .shipping-length, .shipping-height 
+			{width: 26%;float:left;line-height:6px;text-align:center;font-size: 12px;}
+table input[type=text].max-small-items	{width: 32%;float:right;padding: 5px 5px 3px;text-align:center;}
+.shipping-adjustment input {text-align:right;font-family: "Forza-Bold";}
+
+/* STYLING PAGE
+---------------- */
+.styling textarea	{width: 100%;min-height: 500px;}
+
+
+.box-size-check{
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+}
+
+header img{
+	float: left;
+    margin: 16px 0 16px 32px;
+    max-height: 60px;
+}
+
+.hidden-order{
+	display:none;
+}
+
+.rate{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  .fulfillment-service-info{
+  	width: 200px;
+  }
+  .fulfillment-link{
+  	width: 200px;
+  }
+}
+.booking-confirmed{
+	margin-bottom: 20px;
+}
+
+.fulfillment-info-section{
+	height: 500px;
+}
+.booking-info,
+.pickup-info,
+.delivery-info,
+.box-info{
+	width: 50%;
+	float: left;
+	height: 200px;
+}
+
+.fulfillment-service-info{
+	margin: 20px 0px;
+}
+
+.fulfillment-service-info div{
+	margin-bottom: 20px;
+}
+
+.fulfilment-options{
+	margin-top: 20px;
+	a{
+		margin: 10px 0px;
+		display: inline-block;
+	}
+}
+
+.hidden{
+	position: absolute;
+	left: -2000px;
+}
+
+#preference_rate_lookup_error{
+	width:100%;
+}
+
+.new_preference,
+.edit_preference{ 
+	fieldset{
+	  border: 1px solid #d4d4d4;
+	  background: #eaeaea;
+	  padding: 30px 24px;	
+	}
+	h1{
+    display: inline-block;
+    width: 80%;		
+	}
+	.actions{
+    display: inline-block;
+    width: 19%;
+    text-align: right;	
+    input{
+	    float: none;    	
+    }	
+	}
+}
+
+.settings-table-wrapper{
+	border: 1px solid #d4d4d4;
+	background: #eaeaea;
+	padding: 30px 24px;
+	margin: 20px 0px;
+	  table{
+			tr:nth-child(even){
+		    background: #f4f4f4;
+			}
+			td{
+		    border: 1px solid #e5e5e5;		
+			}
+			.header{
+		    background: #607B88;
+		    color: #fff;		
+		    td{
+			    font-size: 13px;
+			    font-family: "Forza Bold";    
+		      padding: 1% 1.3%;	
+		    }
+			}
+	}	
+}
+
+.fulfilled-order{
+	background: #cccccc !important;
+}
+
+#hide-processed-orders{
+	display: none;
+}
+
+.hide{
+	display: none;
+}
+
+.variant{
+	display: none;
+}

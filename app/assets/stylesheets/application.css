@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+/* site/brand specific sass variables go here */
+@import "base";
+/* here foundation variables are set to values defined in base */
+@import "foundation_and_overrides";

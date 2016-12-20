@@ -1,0 +1,134 @@
+<section class="container center main">
+  <%= form_tag load_new_products_cached_product_index_path do %>
+    <%= submit_tag "Synchronize Products", :class=>"button1 syncButton" %>
+  <% end %>
+  <h1>Products</h1>
+  <div class="sub-container product-button-bar">
+    <a class="button2 show-variants">SHOW VARIANTS</a>
+    <a class="button2">SHOW HIDDEN</a>
+  </div>
+  <div class="spacer"><!-- --></div>
+  
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <td width="32%">PRODUCT</td>
+        <td width="24%" align="center">DIMENSIONS (cm)</td>
+        <td width="18%" align="center">SIZE</td>
+        <td width="12%" align="center">ADJUST</td>
+        <td width="14%"></td>
+      </tr>
+    </thead>
+    <%= form_tag update_all_cached_product_index_path do %>
+      <tbody class="alt-bgs">
+        <% @cached_products.each_with_index do |cached_product,i| %> 
+          <%= fields_for "cached_products[products][#{i}]", cached_product do |pf| %>
+          <% variants_as_hash = JSON.parse(cached_product.variants) %>
+            <%= pf.hidden_field :id %>
+            <%= pf.hidden_field :product_id %>
+            <%= pf.hidden_field :shop_id %> 
+            <%= pf.hidden_field :sku %>  
+            <tr class='product'>
+              <td class="product-name">
+                <strong><%= cached_product.product_name %></strong><br />
+                <span>Export (Australia) / Standard</span><br />
+                SKU : <%= cached_product.sku %>
+              </td>
+              <td class="box-input-dimensions">
+                <div class="shipping-length">
+                  <%= pf.text_field :length, { :class => 'dimensions', :value => (number_with_precision(pf.object.length, :precision => 1) || 0) } %><br />length
+                </div>
+                <div class="by">X</div>                
+                <div class="shipping-width">
+                  <%= pf.text_field :width, { :class => 'dimensions', :value => (number_with_precision(pf.object.width, :precision => 1) || 0) } %><br />width
+                </div>
+                <div class="by">X</div>
+                <div class="shipping-height">
+                  <%= pf.text_field :height, { :class => 'dimensions', :value => (number_with_precision(pf.object.height, :precision => 1) || 0) } %><br />height
+                </div>
+              </td>
+              <td>
+                <%= pf.check_box :large_item, {:class => 'large-box-check box-size-check product-box-size-check', :checked => pf.object.large_item == 'large' ? true : false}, 'large', 'not-large' %>   
+                <%= pf.check_box :small_item, {:class =>'small-box-check box-size-check product-box-size-check', :checked => pf.object.small_item == 'small' ? true : false}, 'small', 'not-small' %>
+                <a href="#" data-size='large' class="product-size-check checkbox-label button2 button5 <%= pf.object.large_item == "large" ? 'enabled' : '' %>">LARGE</a>                
+                <a href="#" data-size='small' class="product-size-check checkbox-label button2 button6 <%= pf.object.small_item == "small" ? 'enabled' : '' %>">SMALL</a>
+                <%= pf.text_field :max_small, {:class => 'max-small-items', :value => (pf.object.max_small || 0), :placeholder => 'MAX'} %>
+              </td> 
+              <td class="shipping-adjustment">
+                <%= pf.text_field :cost_adjustment, {:class => 'shadow-box', :value => (number_with_precision(pf.object.cost_adjustment, :precision => 1) || 0)}%>
+              </td>
+              <!-- add class .disabled for buttons to grey them out not for use -->
+              <td>
+                <%= submit_tag 'Save', :class=>"button3"%>
+              </td>
+            </tr>
+            <% variants_as_hash.each_with_index do |variant,i| %>
+            <tr class='variant'>
+              <td><%= variant['var_'+i.to_s+'_title'] %></td>
+              <td>
+                <div class="shipping-length">
+                  <%= pf.text_field ('var_'+i.to_s+'_length').to_sym, { :class => 'dimensions variant-dimension', :value => (number_with_precision(variant['var_'+i.to_s+'_length'].to_f, :precision => 1) || 0) } %><br />length
+                </div>
+                <div class="by">X</div>                
+                <div class="shipping-width">
+                  <%= pf.text_field ('var_'+i.to_s+'_width').to_sym, { :class => 'dimensions variant-dimension', :value => (number_with_precision(variant['var_'+i.to_s+'_width'].to_f, :precision => 1) || 0) } %><br />width
+                </div>
+                <div class="by">X</div>
+                <div class="shipping-height">
+                  <%= pf.text_field ('var_'+i.to_s+'_height').to_sym, { :class => 'dimensions variant-dimension', :value => (number_with_precision(variant['var_'+i.to_s+'_height'].to_f, :precision => 1) || 0) } %><br />height
+                </div>
+              </td>
+              <td>
+                <%= pf.check_box ('var_'+i.to_s+'_large').to_sym, {:class => 'large-box-check variant-box-size-check box-size-check', :checked => variant['var_'+i.to_s+'_large'] == 'large' ? true : false}, 'large', 'not-large' %>   
+                <%= pf.check_box ('var_'+i.to_s+'_small').to_sym, {:class =>'small-box-check variant-box-size-check box-size-check', :checked => variant['var_'+i.to_s+'_small'] == 'small' ? true : false}, 'small', 'not-small' %>                
+                <a href="#" data-size='large' class="variant-size-check checkbox-label button2 button5 <%= variant['var_'+i.to_s+'_large'] == "large" ? 'enabled' : '' %>">LARGE</a>                
+                <a href="#" data-size='small' class="variant-size-check checkbox-label button2 button6 <%= variant['var_'+i.to_s+'_small'] == "small" ? 'enabled' : '' %>">SMALL</a>
+                <%= pf.text_field ('var_'+i.to_s+'_small_count').to_sym, {:class => 'max-small-items', :value => (variant['var_'+i.to_s+'_small_count'].to_i || 0), :placeholder => 'MAX'} %>
+              </td> 
+              <td class="shipping-adjustment">
+                <%= pf.text_field ('var_'+i.to_s+'_cost_adjustment').to_sym, {:class => 'shadow-box', :value => (number_with_precision(variant['var_'+i.to_s+'_cost_adjustment'].to_f, :precision => 1) || 0)}%>
+              </td>
+              <td></td>                
+            </tr>
+            <% end %>
+          <% end %> 
+        <% end %> 
+      </tbody>
+    <% end %>
+  </table>
+</section>
+
+
+<script>
+  $(function(){
+    $('.show-variants').on('click',function(){
+      $(this).toggleClass('enabled');
+      $('.variant').toggle();
+    });
+    $('.checkbox-label').on('click',function(e){
+      e.preventDefault();
+      console.log($(this).hasClass('.variant-size-check'));
+      if($(this).hasClass('variant-size-check')){
+        $(this).parent().parent().parent().find('.product-size-check').removeClass('enabled');
+        $(this).parent().parent().parent().find('.product-box-size-check').prop('checked',false);
+      }else{
+        $(this).parent().parent().parent().find('.variant-size-check').removeClass('enabled');
+        $(this).parent().parent().parent().find('.variant-box-size-check').prop('checked',false);        
+      }
+      if($(this).hasClass('enabled')){
+        $(this).removeClass('enabled');
+        $(this).parent().find('.box-size-check').prop('checked',false);
+      }else{
+        $(this).parent().find('.checkbox-label').removeClass('enabled');
+        $(this).parent().find('.box-size-check').prop('checked',false);
+        $(this).addClass('enabled');
+        if($(this).attr('data-size') === 'large'){
+          $(this).parent().find('.large-box-check').prop('checked',true);
+        }else{
+          $(this).parent().find('.small-box-check').prop('checked',true);
+        }
+      }      
+    });
+  });
+</script>
+

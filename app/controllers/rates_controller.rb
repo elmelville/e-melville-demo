@@ -5,15 +5,16 @@ class RatesController < ApplicationController
   def shipping_rates 
   puts 'does this trigger'
   puts 'header'
-  puts request.headers.inspect
+  puts request.headers['X-CSRF-Token'].inspect
+  puts request.headers['rate'].inspect
     preference = get_shop_prefence_from_request
 
 
    # log_params
    puts 'params are'
    puts params.inspect
-top_level = params.require(:rate).permit(:shop_url,:controller,:action)
-sub level = params.require(:rate).permit(rate: [:origin, :destination])   
+    top_level = params.require(:rate).permit(:shop_url,:controller,:action)
+    sub_level = params.require(:rate).permit(rate: [:origin, :destination])   
    puts top_level.inspect
    puts sub_level.inspect
    puts sub_level[:origin][:country]

@@ -5,7 +5,8 @@ class RatesController < ApplicationController
   def shipping_rates 
   puts 'does this trigger'
     preference = get_shop_prefence_from_request
-
+puts 'pref found'
+puts preference.inspect
 top_level = params.require(:rate).permit(:shop_url,:controller,:action)
 sub level = params.require(:rate).permit(rate: [:origin, :destination])
    # log_params
@@ -24,12 +25,6 @@ sub level = params.require(:rate).permit(rate: [:origin, :destination])
     else
       render :json => {:rates => rates}
     end
-  rescue ActiveMerchant::Shipping::ResponseError => e
-    puts 'some shit went down'
-    puts params.inspect
-    Rails.logger.debug e.message
-    puts e.message  unless Rails.env.production?
-    render nothing: true
   end
 
   private

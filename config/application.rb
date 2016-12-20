@@ -25,6 +25,16 @@ module ShopifyShippingHelper
       g.helper_specs false
     end
     
+    # configuration for allowing some servers to access the aus api connection
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '/australia_post_api_connections',
+          :headers => ['Origin', 'Accept', 'Content-Type', 'X-CSRF-Token'],
+          :methods => [:get, :post]
+      end
+    end
+    
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib)

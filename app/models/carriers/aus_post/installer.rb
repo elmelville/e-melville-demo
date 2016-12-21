@@ -11,7 +11,7 @@ module Carriers
             shopify_api_shop.add_metafield(found[0])            
           end                       
         else
-          field = ShopifyAPI::Metafield.new({:namespace =>'chief_products',:key=>key_name, :value=>field_value, :value_type=>'string' })
+          field = ShopifyAPI::Metafield.new({:namespace =>'shipping_helper',:key=>key_name, :value=>field_value, :value_type=>'string' })
           shopify_api_shop.add_metafield(field)
         end
       end

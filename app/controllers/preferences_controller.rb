@@ -10,7 +10,7 @@ class PreferencesController < ShopifyApp::AuthenticatedController
 
 
   def show
-    @page_title = "Chief Products Shipping Calculator - Settings"
+    @page_title = "Seventyfour Shopify Shipping Helper - Settings"
     @preference = get_preference
     @preference.carrier = 'aus_post'
     @carrier_preference = get_carrier_preference(@preference.carrier)
@@ -30,7 +30,7 @@ class PreferencesController < ShopifyApp::AuthenticatedController
   # GET /preference/edit
   def edit
     
-    @page_title = "Chief Products Shipping Calculator - Settings"
+    @page_title = "Seventyfour Shopify Shipping Helper - Settings"
     @preference = get_preference
     @carrier_preference = get_carrier_preference(@preference.carrier)
     
@@ -167,7 +167,7 @@ class PreferencesController < ShopifyApp::AuthenticatedController
         shopify_api_shop.add_metafield(found[0])            
       end                       
     else
-      field = ShopifyAPI::Metafield.new({:namespace =>'chief_products',:key=>key_name, :value=>field_value, :value_type=>'string' })
+      field = ShopifyAPI::Metafield.new({:namespace =>'shipping_helper',:key=>key_name, :value=>field_value, :value_type=>'string' })
       shopify_api_shop.add_metafield(field)
     end
   end  

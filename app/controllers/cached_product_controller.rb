@@ -7,7 +7,7 @@ class CachedProductController < ShopifyApp::AuthenticatedController
   layout "application-no-left"
 
   def index
-    @page_title = "Chief Products Shipping Calculator - Products"
+    @page_title = "Seventyfour Shopify Shipping Helper - Products"
     
     @shop = current_shop 
     

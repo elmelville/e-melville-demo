@@ -1,13 +1,97 @@
 module Carriers
   module AusPost
     class Service < ::Carriers::Service
+      def combine_items(items)
+        bundles = []
+        cached_items = []
+        smalls_left = false
+        #make list of cached items
+        items.each do |line_item|
+          item_qty = line_item['quantity'].to_i
+          (1..item_qty).each do |qty|
+            cached_items.push(line_item)
+          end
+        end
+        #make list of small items from cached items
+        cached_items.delete_if do |cached_item|
+          temp = CachedProduct.find_by_product_id(cached_item['product_id'].to_s)
+          if !temp.blank?
+            if temp.small_item == 'small'
+              (0..cached_item['quantity']-1).each do |i|
+                small_items.push(cached_item)
+                smalls_left = true
+              end
+              true
+            end
+          end
+        end      
+        #sort small items ascending by how many will fit with a large item
+        def compare(x,y)
+          a = CachedProduct.find_by_product_id(x['product_id'].to_s)
+          b = CachedProduct.find_by_product_id(y['product_id'].to_s)
+          return a.max_small <=> b.max_small
+        end
+        small_items.sort! { |a,b| compare(a,b) }  
+        #create an array of small item @bundles that will bundle together with any available large items
+        while smalls_left
+          if small_items.length > 0
+            small_cached = CachedProduct.find_by_product_id(small_items[0]['product_id'].to_s)
+            items_to_bundle = small_cached.max_small
+            if small_items.length >= items_to_bundle
+              temp_small = []
+              (0..items_to_bundle-1).each do |i|
+                temp_small.push(small_items.shift(1))      
+              end
+              bundles[bundle_count] = temp_small
+              bundle_count += 1
+              smalls_left = small_items.length > 0 ? true : false
+            else
+              smalls_left = false
+            end
+          else
+            smalls_left = false
+          end
+        end
+        #assign remaining small items into a new bundle
+        if small_items.length > 0
+          bundles[bundle_count] = small_items
+        end    
+        #add available large items to bundles if any bundles exist
+        if bundles.length > 0
+          bundle_count = 0
+          cached_items.delete_if do |item|
+            large_cached = CachedProduct.find_by_product_id(item['product_id'].to_s)
+            if (large_cached.large_item == 'large') && (bundles.length > bundle_count)
+              wrapped = [item]
+              bundles[bundle_count].unshift(wrapped)
+              bundle_count += 1
+              true
+            end
+          end
+        end 
+        #add remaining items to individual bundles
+        cached_items.each do |item|
+          wrapped = [item]
+          bundles[bundle_count].unshift(wrapped)
+          bundle_count += 1
+        end
+        return bundles
+      end
       def fetch_rates   
         puts 'entered auspostbus calc'
         preference = @preference 
         @returned_rates = []
+        @order_weight = 0
         #does order have both packages and satchels?
         @mixed_order = false
         @service_counts = {}
+        #calculate order weight
+        items.each do |line_item|
+          item_qty = line_item['quantity'].to_i
+          (1..item_qty).each do |qty|
+            @order_weight += line_item['grams'].to_i
+          end
+        end        
         items.each do |item|
           current_id = item["product_id"].to_s
           cached_item = CachedProduct.find_by(product_id: current_id)

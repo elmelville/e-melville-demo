@@ -161,8 +161,8 @@ module Carriers
                     <wsse:Security
                       xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/04/secext">
                         <wsse:UsernameToken>
-                            <wsse:Username>BILL@CHIEFPRODUCTS.COM.AU</wsse:Username>
-                            <wsse:Password>mus@K521</wsse:Password>
+                            <wsse:Username></wsse:Username>
+                            <wsse:Password></wsse:Password>
                         </wsse:UsernameToken>
                     </wsse:Security>
                 </soapenv:Header>
@@ -236,8 +236,8 @@ module Carriers
                     <wsse:Security
                       xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/04/secext">
                         <wsse:UsernameToken>
-                            <wsse:Username>BILL@CHIEFPRODUCTS.COM.AU</wsse:Username>
-                            <wsse:Password>mus@K521</wsse:Password>
+                            <wsse:Username></wsse:Username>
+                            <wsse:Password></wsse:Password>
                         </wsse:UsernameToken>
                     </wsse:Security>
                 </soapenv:Header>
